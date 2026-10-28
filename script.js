@@ -74,3 +74,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// ==========================================================================
+// LIGHTBOX FUNCTIONS (Gallery Documentation)
+// ==========================================================================
+
+/**
+ * Opens the fullscreen lightbox with the given image source and caption.
+ * @param {string} src - Image URL
+ * @param {string} caption - Caption text
+ */
+function openLightbox(src, caption) {
+  const overlay = document.getElementById('lightbox-overlay');
+  const img = document.getElementById('lightbox-img');
+  const cap = document.getElementById('lightbox-caption');
+
+  if (!overlay || !img || !cap) return;
+
+  img.src = src;
+  img.alt = caption;
+  cap.textContent = caption;
+  overlay.classList.add('is-active');
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Closes the lightbox modal.
+ */
+function closeLightbox() {
+  const overlay = document.getElementById('lightbox-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('is-active');
+  document.body.style.overflow = '';
+
+  // Clear src after transition to reset
+  setTimeout(() => {
+    const img = document.getElementById('lightbox-img');
+    if (img) img.src = '';
+  }, 300);
+}
+
+// Close lightbox on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
