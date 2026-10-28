@@ -1418,3 +1418,324 @@ body {
     font-size: 0.75rem;
   }
 }
+
+/* ==========================================================================
+   DOCUMENTATION GALLERY STYLES
+   ========================================================================== */
+
+/* --- Gallery Section Wrapper --- */
+.doc-gallery-section {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.doc-gallery-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cyan-400);
+  margin-bottom: 1rem;
+  opacity: 0.85;
+}
+
+.doc-gallery-label i {
+  font-size: 0.9rem;
+}
+
+/* --- Gallery Grid (default 3 columns) --- */
+.doc-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.doc-gallery-grid-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.doc-gallery-grid-1 {
+  grid-template-columns: 1fr;
+}
+
+/* Flexible grid for org cards (auto-fill, 5 for BEM, 4 for GenBI) */
+.doc-gallery-grid-org {
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+
+/* --- Individual Gallery Item --- */
+.doc-gallery-item {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: zoom-in;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  aspect-ratio: 4/3;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.doc-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.doc-gallery-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--cyan-400);
+  box-shadow: 0 8px 24px rgba(34, 211, 238, 0.2);
+}
+
+.doc-gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+/* Wide single item (for project screenshots) */
+.doc-gallery-item-wide {
+  aspect-ratio: 16/7;
+}
+
+/* --- Hover Overlay (zoom icon) --- */
+.doc-gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(99, 102, 241, 0.15));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.doc-gallery-overlay i {
+  font-size: 1.6rem;
+  color: white;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+}
+
+.doc-gallery-item:hover .doc-gallery-overlay {
+  opacity: 1;
+}
+
+/* --- Sertifikat Magang Row (below BPS gallery) --- */
+.doc-cert-row {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.doc-cert-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: zoom-in;
+  padding: 0.6rem 1rem 0.6rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  background: rgba(34, 211, 238, 0.04);
+  transition: all var(--transition-fast);
+  max-width: 400px;
+}
+
+.doc-cert-item img {
+  width: 80px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.doc-cert-item span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--cyan-400);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.doc-cert-item:hover {
+  border-color: var(--cyan-400);
+  background: rgba(34, 211, 238, 0.1);
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   CERTIFICATE THUMBNAIL IN CERT ITEMS
+   ========================================================================== */
+
+.cert-doc-thumb {
+  position: relative;
+  margin-top: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: zoom-in;
+  border: 1px solid var(--border-subtle);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.cert-doc-thumb img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.cert-doc-thumb:hover {
+  border-color: var(--amber-400);
+  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.2);
+}
+
+.cert-doc-thumb:hover img {
+  transform: scale(1.04);
+}
+
+.cert-thumb-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.75));
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.cert-doc-thumb:hover .cert-thumb-overlay {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   LIGHTBOX MODAL
+   ========================================================================== */
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 20, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-container {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  animation: lightboxIn 0.3s ease;
+}
+
+@keyframes lightboxIn {
+  from { transform: scale(0.88); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.lightbox-caption {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-align: center;
+  max-width: 600px;
+  margin: 0;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.lightbox-close:hover {
+  background: rgba(251, 113, 133, 0.3);
+  border-color: var(--rose-400);
+  color: var(--rose-400);
+  transform: rotate(90deg);
+}
+
+/* ==========================================================================
+   RESPONSIVE GALLERY ADJUSTMENTS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .doc-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .doc-gallery-grid-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .doc-gallery-item-wide {
+    aspect-ratio: 16/9;
+  }
+
+  .cert-doc-thumb img {
+    height: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .doc-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .doc-gallery-grid-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lightbox-container {
+    max-width: 95vw;
+  }
+}
